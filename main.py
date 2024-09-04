@@ -28,6 +28,11 @@ def dusman_gemisi():
             dusmanlar[i].y = random.randint(-400, -100)
             dusmanlar[i].speed = random.randint(4, 10)
             
+        if gemi.x > dusmanlar[i].x:
+            dusmanlar[i].x += 2
+        else:
+            dusmanlar[i].x -= 2
+            
 def update(dt):
     dusman_gemisi()
     
@@ -42,7 +47,7 @@ def draw():
     
     for i in range(len(dusmanlar)):
         dusmanlar[i].draw()
-    
+
 def on_mouse_move(pos):
     gemi.pos = pos
     
