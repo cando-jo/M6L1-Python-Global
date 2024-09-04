@@ -8,7 +8,7 @@ WIDTH = 600
 
 uzay = Actor('uzay')
 gemi = Actor('gemi', (300, 300))
-
+mod = "oyun"
 dusmanlar = []
 
 for i in range(5): # 0 1 2 3 4
@@ -34,20 +34,26 @@ def dusman_gemisi():
             dusmanlar[i].x -= 2
             
 def update(dt):
-    dusman_gemisi()
+    global mod
+    if mod == 'oyun':
+        dusman_gemisi()
     
-    for i in range(len(dusmanlar)):
-        if gemi.colliderect(dusmanlar[i]):
-            exit()
+        for i in range(len(dusmanlar)):
+            if gemi.colliderect(dusmanlar[i]):
+                mod = "son"
     
 def draw():
-    uzay.draw()
-    gemi.draw()
-    # screen.draw.text('Uzay Yolculuğu', center=(300, 150), color="white", fontsize=36)
-    
-    for i in range(len(dusmanlar)):
-        dusmanlar[i].draw()
-
+    if mod == "oyun":
+        uzay.draw()
+        gemi.draw()
+        # screen.draw.text('Uzay Yolculuğu', center=(300, 150), color="white", fontsize=36)
+        
+        for i in range(len(dusmanlar)):
+            dusmanlar[i].draw()
+    else:
+        uzay.draw()
+        screen.draw.text('OYUN BITTI', center=(300, 150), color="white", fontsize=36)
+        
 def on_mouse_move(pos):
     gemi.pos = pos
     
